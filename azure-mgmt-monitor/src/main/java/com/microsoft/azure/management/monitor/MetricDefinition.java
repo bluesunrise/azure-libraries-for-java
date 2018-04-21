@@ -118,6 +118,9 @@ public interface MetricDefinition extends
     @Method
     MetricsQueryDefinitionStages.WithMetricStartTimeFilter defineQuery();
 
+    @Method
+    MetricsQueryDefinitionStages.WithMetricStartTimeFilter defineQuery(String metricsList, String aggregationList);
+
     /**
      * The entirety of a Metrics query definition.
      */

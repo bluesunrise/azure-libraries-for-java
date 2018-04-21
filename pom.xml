@@ -6,7 +6,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.microsoft.azure</groupId>
-  <version>1.9.0</version>
+  <version>1.9.0-GW</version>
   <artifactId>azure-parent</artifactId>
   <packaging>pom</packaging>
 
@@ -50,6 +50,11 @@
       <uniqueVersion>true</uniqueVersion>
       <layout>default</layout>
     </snapshotRepository>
+    <!-- GWOS patched -->
+    <repository>
+        <id>groundwork-releases</id>
+        <url>http://geneva/nexus/content/repositories/groundwork-ee-m2-repo</url>
+      </repository>
   </distributionManagement>
 
   <dependencyManagement>
@@ -352,6 +357,17 @@
           <artifactId>bundler-maven-plugin</artifactId>
           <version>0.0.2</version>
         </plugin>
+
+        <!-- GWOS patched -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.1</version>
+          <configuration>
+            <skip>false</skip>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

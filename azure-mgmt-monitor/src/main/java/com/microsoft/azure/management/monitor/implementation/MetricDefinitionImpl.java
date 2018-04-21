@@ -49,6 +49,8 @@ class MetricDefinitionImpl
     private ResultType resultType;
     private Integer top;
     private String orderBy;
+    private String metricsList;
+    private String aggregationList;
 
     MetricDefinitionImpl(final MetricDefinitionInner innerModel, final MonitorManager monitorManager) {
         super(innerModel);
@@ -131,6 +133,14 @@ class MetricDefinitionImpl
     }
 
     @Override
+    public MetricDefinitionImpl defineQuery(String metricsList, String aggregationList) {
+        defineQuery();
+        this.metricsList = metricsList;
+        this.aggregationList = aggregationList;
+        return this;
+    }
+
+    @Override
     public MetricDefinitionImpl startingFrom(DateTime startTime) {
         this.queryStartTime = startTime;
         return this;
@@ -190,8 +200,8 @@ class MetricDefinitionImpl
                         this.queryStartTime.withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime()),
                         this.queryEndTime.withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime())),
                 this.interval,
-                this.inner.name().value(),
-                this.aggreagation,
+                (this.metricsList != null) ? metricsList : this.inner.name().value(),
+                (this.aggregationList != null) ? this.aggregationList : this.aggreagation,
                 this.top,
                 this.orderBy,
                 this.odataFilter,
